@@ -1,4 +1,4 @@
-package com.comunidadedevspace.taskbeats
+package com.comunidadedevspace.taskbeats.data
 //DAO É A DATA ACCESS OBJECT, ACESSA OS DADOS
 import androidx.room.Dao
 import androidx.room.Insert

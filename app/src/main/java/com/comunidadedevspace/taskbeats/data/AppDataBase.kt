@@ -1,4 +1,4 @@
-package com.comunidadedevspace.taskbeats
+package com.comunidadedevspace.taskbeats.data
 //acesso a tabela/BD pelo taskdao
 import androidx.room.Database
 import androidx.room.RoomDatabase
