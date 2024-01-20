@@ -3,6 +3,7 @@ package com.comunidadedevspace.taskbeats.presentation
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -12,7 +13,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.comunidadedevspace.taskbeats.R
+import com.comunidadedevspace.taskbeats.TaskBeatsApplication
 import com.comunidadedevspace.taskbeats.data.AppDataBase
 import com.comunidadedevspace.taskbeats.data.Task
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,12 +33,8 @@ class MainActivity : AppCompatActivity() {
     private val adapter: TaskListAdapter by lazy {
         TaskListAdapter(::onListItemClicked)
     }
-    private val dataBase by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            AppDataBase::class.java, "taskbeats-database"
-        ).build()
-    }
+
+    lateinit var dataBase: AppDataBase
 
     private val dao by lazy {
         dataBase.taskDao()
@@ -50,10 +49,10 @@ class MainActivity : AppCompatActivity() {
             val taskAction = data?.getSerializableExtra(TASK_ACTION_RESULT) as TaskAction
             val task: Task = taskAction.task
 
-           when (taskAction.actionType){
-               ActionType.DELETE.name -> deleteById(task.id)
-               ActionType.CREATE.name -> insertIntoDataBase(task)
-               ActionType.UPDATE.name -> updateIntoDataBase(task)
+            when (taskAction.actionType) {
+                ActionType.DELETE.name -> deleteById(task.id)
+                ActionType.CREATE.name -> insertIntoDataBase(task)
+                ActionType.UPDATE.name -> updateIntoDataBase(task)
             }
         }
     }
@@ -78,6 +77,16 @@ class MainActivity : AppCompatActivity() {
             openTaskListDetail(null)
 
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        dataBase = (application as TaskBeatsApplication).dataBase
+
+        Log.d("anaTeste", dataBase.toString())
+
+        listFromDataBase()
     }
 
     //create
