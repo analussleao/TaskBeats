@@ -1,5 +1,6 @@
 package com.comunidadedevspace.taskbeats.data
 //DAO É A DATA ACCESS OBJECT, ACESSA OS DADOS
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,7 +15,7 @@ interface TaskDao {
     fun insert(task: Task)
         //fazer busca dentro da base de dados=== read do crud
     @Query("Select * from task")
-    fun getAll(): List<Task>
+    fun getAll(): LiveData<List<Task>>
 
     //para fazer o update é preciso encontrar a tarefa em caso de conflito que quer alterar
 
