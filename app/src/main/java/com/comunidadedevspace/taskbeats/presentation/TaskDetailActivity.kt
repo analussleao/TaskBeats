@@ -64,7 +64,7 @@ class TaskDetailActivity : AppCompatActivity() {
         //recuperar campo do xml
         //tvTitle = findViewById<TextView>(R.id.tv_task_title_detail)
         //setarum novo text na tela
-        //tvTitle.text = task?.title ?: "Adicione uma tarefa"
+       // tvTitle.text = task?.title ?: "Adicione uma tarefa"
     }
 
     private fun addOrUpdateTask(

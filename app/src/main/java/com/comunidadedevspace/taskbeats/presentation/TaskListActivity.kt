@@ -46,14 +46,9 @@ class TaskListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_list)
-        //criar o menu
         setSupportActionBar(findViewById(R.id.toolbar))
-        //criar a base de dados na activity posteriomente sera em outro local pois nao se cria aqui
 
-        listFromDataBase()
         ctnContent = findViewById(R.id.ctn_content)
-
-
         val rvTask: RecyclerView = findViewById(R.id.rv_task_list)
 
         rvTask.adapter = adapter
@@ -70,8 +65,6 @@ class TaskListActivity : AppCompatActivity() {
         listFromDataBase()
     }
 
-    //create
-
     private fun deleteAll() {
         val taskAction = TaskAction(null, ActionType.DELETE_ALL.name)
         viewModel.execute(taskAction)
@@ -83,10 +76,10 @@ class TaskListActivity : AppCompatActivity() {
 
         //obeserver
         val listObserver = Observer<List<Task>> { listTasks ->
-            if(listTasks.isEmpty()){
-                ctnContent.visibility=View.VISIBLE
-            }else{
-                ctnContent.visibility=View.GONE
+            if (listTasks.isEmpty()) {
+                ctnContent.visibility = View.VISIBLE
+            } else {
+                ctnContent.visibility = View.GONE
             }
             adapter.submitList(listTasks)
         }
@@ -107,7 +100,6 @@ class TaskListActivity : AppCompatActivity() {
         openTaskListDetail(task)
     }
 
-    //null=default argument
     private fun openTaskListDetail(task: Task? = null) {
         val intent = TaskDetailActivity.start(this, task)
         startForResult.launch(intent)
@@ -135,6 +127,7 @@ class TaskListActivity : AppCompatActivity() {
     }
 
 }
+
 enum class ActionType {
     DELETE,
     DELETE_ALL,

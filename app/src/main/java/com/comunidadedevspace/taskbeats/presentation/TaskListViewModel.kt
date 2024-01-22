@@ -25,33 +25,28 @@ class TaskListViewModel(private val taskDao: TaskDao) : ViewModel() {
     }
 
     private fun deleteById(id: Int) {
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO){
             taskDao.deleteById(id)
         }
     }
     private fun insertIntoDataBase(task: Task) {
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO){
             taskDao.insert(task)
-
         }
-
     }
 
     //update do crud
     private fun updateIntoDataBase(task: Task) {
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO){
             taskDao.update(task)
-
         }
-
     }
 
 
 
     private fun deleteAll() {
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO){
             taskDao.deleteAll()
-
         }
     }
 
